@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.tarefas.domain.Tarefa;
 import br.com.tarefas.repositories.TarefaRepository;
+import br.com.tarefas.services.exception.ObjectNotFoundException;
 
 @Service
 public class TarefaService {
@@ -18,7 +19,8 @@ public class TarefaService {
 		
 		Optional<Tarefa> tarefa = tarefaRepository.findById(id);
 		
-		return tarefa.orElse(null);
+		return tarefa.orElseThrow(
+				() -> new ObjectNotFoundException("Objeto não encontrado para o ID: " + id));
 	}
 
 }

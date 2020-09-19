@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Atividade implements Serializable{
 	private static final long serialVersionUID = 1L;
@@ -22,6 +24,7 @@ public class Atividade implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "tarefa_id" )
+	@JsonBackReference
 	private Tarefa tarefa;
 	
 	public Atividade() {
