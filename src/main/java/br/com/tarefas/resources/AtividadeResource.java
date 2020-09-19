@@ -18,7 +18,7 @@ public class AtividadeResource {
 	private AtividadeService atividadeServico;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> findById(@PathVariable Integer id){
+	public ResponseEntity<Atividade> findById(@PathVariable Integer id){
 		
 		Atividade atividade = atividadeServico.buscar(id);
 		

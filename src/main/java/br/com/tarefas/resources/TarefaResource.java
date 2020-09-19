@@ -22,9 +22,9 @@ public class TarefaResource {
 	private TarefaService tarefaService;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> findById(@PathVariable Integer id) {
+	public ResponseEntity<Tarefa> findById(@PathVariable Integer id) {
 		
-		Tarefa tarefa = tarefaService.buscar(id);
+		Tarefa tarefa = tarefaService.findById(id);
 		
 		return ResponseEntity.ok().body(tarefa);
 	}
@@ -32,7 +32,7 @@ public class TarefaResource {
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@RequestBody Tarefa tarefa){
 		
-		Tarefa novaTarefa = tarefaService.salvar(tarefa);
+		Tarefa novaTarefa = tarefaService.create(tarefa);
 		URI uri = ServletUriComponentsBuilder
 				.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(novaTarefa.getId())
@@ -40,5 +40,10 @@ public class TarefaResource {
 		return ResponseEntity.created(uri).build();	
 	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public ResponseEntity<Void> update(@PathVariable Integer id, @RequestBody Tarefa tarefa){
+		tarefa = tarefaService.update(tarefa);
+		return ResponseEntity.noContent().build();
+	}
 
 }

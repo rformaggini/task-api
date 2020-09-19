@@ -15,7 +15,7 @@ public class TarefaService {
 	@Autowired
 	private TarefaRepository tarefaRepository;
 	
-	public Tarefa buscar(Integer id) {
+	public Tarefa findById(Integer id) {
 		
 		Optional<Tarefa> tarefa = tarefaRepository.findById(id);
 		
@@ -23,15 +23,15 @@ public class TarefaService {
 				() -> new ObjectNotFoundException("Objeto não encontrado para o ID: " + id));
 	}
 
-	public Tarefa salvar(Tarefa tarefa) {
+	public Tarefa create(Tarefa tarefa) {
 		return tarefaRepository.save(tarefa);	
 	}
 	
-	public Tarefa atualizar(Tarefa tarefa) {
+	public Tarefa update(Tarefa tarefa) {
 		return tarefaRepository.save(tarefa);	
 	}
 	
-	public void deletar(Tarefa tarefa) {
+	public void delete(Tarefa tarefa) {
 		tarefaRepository.delete(tarefa);
 	}
 	
