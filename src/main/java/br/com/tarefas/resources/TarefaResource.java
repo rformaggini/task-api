@@ -3,28 +3,31 @@ package br.com.tarefas.resources;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.websocket.server.PathParam;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.tarefas.domain.Tarefa;
+import br.com.tarefas.services.TarefaService;
 
 @RestController
 @RequestMapping(value ="/tarefas")
 public class TarefaResource {
 	
-	@RequestMapping(method = RequestMethod.GET)
-	public List<Tarefa> listar() {
+	@Autowired
+	private TarefaService tarefaService;
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+	public ResponseEntity<?> findById(@PathVariable Integer id) {
 		
-		Tarefa tarefa1 = new Tarefa();
-		Tarefa tarefa2 = new Tarefa();
+		Tarefa tarefa = tarefaService.buscar(id);
 		
-		List<Tarefa> listaTarefas= new ArrayList<Tarefa>();
-		
-		listaTarefas.add(tarefa1);
-		listaTarefas.add(tarefa2);
-		
-		return listaTarefas;
+		return ResponseEntity.ok().body(tarefa);
 	}
 
 }
