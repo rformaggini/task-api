@@ -1,11 +1,15 @@
 package br.com.tarefas.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Tarefa implements Serializable {
@@ -15,17 +19,18 @@ public class Tarefa implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private Atividade[] atividade;
+	
+	@OneToMany(mappedBy = "tarefa", cascade = CascadeType.ALL)
+	private List<Atividade> atividade = new ArrayList<Atividade>();
 	
 	public Tarefa() {
 		
 	}
 	
-	public Tarefa(Integer id, String nome, Atividade[] atividade) {
+	public Tarefa(Integer id, String nome) {
 		super();
 		this.id = id;
 		this.nome = nome;
-		this.atividade = atividade;
 	}
 
 	public Integer getId() {
@@ -44,11 +49,11 @@ public class Tarefa implements Serializable {
 		this.nome = nome;
 	}
 
-	public Atividade[] getAtividade() {
+	public List<Atividade> getAtividade() {
 		return atividade;
 	}
 
-	public void setAtividade(Atividade[] atividade) {
+	public void setAtividade(List<Atividade> atividade) {
 		this.atividade = atividade;
 	}
 

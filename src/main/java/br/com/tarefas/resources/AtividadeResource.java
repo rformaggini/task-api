@@ -7,22 +7,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.tarefas.domain.Tarefa;
-import br.com.tarefas.services.TarefaService;
+import br.com.tarefas.domain.Atividade;
+import br.com.tarefas.services.AtividadeService;
 
 @RestController
-@RequestMapping(value ="/tarefas")
-public class TarefaResource {
+@RequestMapping(value = "/atividades")
+public class AtividadeResource {
 	
 	@Autowired
-	private TarefaService tarefaService;
+	private AtividadeService atividadeServico;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<?> findById(@PathVariable Integer id) {
+	public ResponseEntity<?> findById(@PathVariable Integer id){
 		
-		Tarefa tarefa = tarefaService.buscar(id);
+		Atividade atividade = atividadeServico.buscar(id);
 		
-		return ResponseEntity.ok().body(tarefa);
+		return ResponseEntity.ok().body(atividade);
 	}
+	
 
 }

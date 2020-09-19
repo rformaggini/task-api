@@ -1,12 +1,13 @@
 package br.com.tarefas.domain;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Atividade implements Serializable{
@@ -16,15 +17,18 @@ public class Atividade implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String descricao;
-	private Date dataInclusao;
+	private String dataInclusao;
 	private Boolean status;
+	
+	@ManyToOne
+	@JoinColumn(name = "tarefa_id" )
+	private Tarefa tarefa;
 	
 	public Atividade() {
 		
 	}
 			
-	
-	public Atividade(Integer id, String descricao, Date dataInclusao, Boolean status) {
+	public Atividade(Integer id, String descricao, String dataInclusao, Boolean status) {
 		super();
 		this.id = id;
 		this.descricao = descricao;
@@ -53,12 +57,12 @@ public class Atividade implements Serializable{
 	}
 
 
-	public Date getDataInclusao() {
+	public String getDataInclusao() {
 		return dataInclusao;
 	}
 
 
-	public void setDataInclusao(Date dataInclusao) {
+	public void setDataInclusao(String dataInclusao) {
 		this.dataInclusao = dataInclusao;
 	}
 
@@ -72,6 +76,13 @@ public class Atividade implements Serializable{
 		this.status = status;
 	}
 
+	public Tarefa getTarefa() {
+		return tarefa;
+	}
+
+	public void setTarefa(Tarefa tarefa) {
+		this.tarefa = tarefa;
+	}
 
 	@Override
 	public int hashCode() {
