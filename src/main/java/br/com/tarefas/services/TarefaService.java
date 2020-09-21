@@ -1,5 +1,6 @@
 package br.com.tarefas.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,12 @@ public class TarefaService {
 		return tarefaRepository.save(tarefa);	
 	}
 	
-	public void delete(Tarefa tarefa) {
-		tarefaRepository.delete(tarefa);
+	public void delete(Integer id) {
+		tarefaRepository.deleteById(id);
+	}
+	
+	public List<Tarefa> findAll(){
+		return tarefaRepository.findAll();
 	}
 	
 }
